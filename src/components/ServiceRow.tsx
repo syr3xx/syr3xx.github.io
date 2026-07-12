@@ -31,9 +31,11 @@ export default function ServiceRow({ num, name, desc, isFirst }: ServiceRowProps
       }}
     >
       {/* Reading progress lives in the numeral itself: an outlined "01"
-          sits as the base, and a gradient-filled copy sweeps in from the
-          left — clipped by the same scroll progress that used to drive a
-          separate progress bar — so the number fills in as you read. */}
+          sits as the base, and a solid-black copy sweeps in from the left —
+          clipped by the same scroll progress that used to drive a separate
+          progress bar — so the number fills in as you read. Solid black
+          instead of the brand gradient keeps it quiet, matching the
+          section's otherwise monochrome palette. */}
       <div className="relative shrink-0" style={numStyle}>
         <span
           aria-hidden
@@ -43,17 +45,7 @@ export default function ServiceRow({ num, name, desc, isFirst }: ServiceRowProps
           {num}
         </span>
         <motion.div className="absolute inset-0 overflow-hidden" style={{ width: fillWidth }}>
-          <span
-            className="font-normal block whitespace-nowrap"
-            style={{
-              background: "linear-gradient(90deg, #B600A8, #7621B0, #BE4C00)",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-            }}
-          >
-            {num}
-          </span>
+          <span className="font-normal block whitespace-nowrap text-[#0C0C0C]">{num}</span>
         </motion.div>
       </div>
 
