@@ -13,10 +13,6 @@ interface LanguageContextValue {
   setLang: (lang: Lang) => void;
   t: (typeof translations)["ru"];
   transitionKey: number;
-  // Increments the instant `lang` actually swaps (once the wave has fully
-  // covered the screen), so content can fade in without being tied to a
-  // remount — see the opacity fade on the wrapper in App.tsx.
-  revealKey: number;
 }
 
 const LanguageContext = createContext<LanguageContextValue | null>(null);
@@ -24,7 +20,6 @@ const LanguageContext = createContext<LanguageContextValue | null>(null);
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [lang, setLangState] = useState<Lang>("ru");
   const [transitionKey, setTransitionKey] = useState(0);
-  const [revealKey, setRevealKey] = useState(0);
   const timeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
@@ -42,24 +37,14 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     if (next === lang) return;
     setTransitionKey((k) => k + 1);
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
-    timeoutRef.current = setTimeout(() => {
-      setLangState(next);
-      setRevealKey((k) => k + 1);
-    }, LANG_TRANSITION_COVER_MS);
+    timeoutRef.current = setTimeout(() => setLangState(next), LANG_TRANSITION_COVER_MS);
   };
 
   const toggleLang = () => changeLang(lang === "ru" ? "en" : "ru");
 
   return (
     <LanguageContext.Provider
-      value={{
-        lang,
-        toggleLang,
-        setLang: changeLang,
-        t: translations[lang],
-        transitionKey,
-        revealKey,
-      }}
+      value={{ lang, toggleLang, setLang: changeLang, t: translations[lang], transitionKey }}
     >
       {children}
     </LanguageContext.Provider>
