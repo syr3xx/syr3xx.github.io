@@ -29,7 +29,7 @@ const ROW2 = TECH.slice(11);
 
 function Tile({ slug }: { slug: string }) {
   return (
-    <div className="glass group flex items-center justify-center gap-3 w-[220px] h-[130px] rounded-2xl shrink-0 transition-colors duration-300 hover:border-white/30">
+    <div className="glass-tile group flex items-center justify-center gap-3 w-[220px] h-[130px] rounded-2xl shrink-0 transition-colors duration-300 hover:border-white/30">
       <img
         src={`https://cdn.simpleicons.org/${slug}/D7E2EA`}
         alt={slug}
@@ -58,7 +58,8 @@ export default function MarqueeSection() {
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
 
-    let raf: number;
+    let raf = 0;
+    let running = false;
     const tick = () => {
       current.current += (target.current - current.current) * 0.08;
       const offset = current.current - 200;
@@ -66,11 +67,29 @@ export default function MarqueeSection() {
       if (row2Ref.current) row2Ref.current.style.transform = `translateX(${-offset}px)`;
       raf = requestAnimationFrame(tick);
     };
-    raf = requestAnimationFrame(tick);
+    const start = () => {
+      if (running) return;
+      running = true;
+      raf = requestAnimationFrame(tick);
+    };
+    const stop = () => {
+      running = false;
+      cancelAnimationFrame(raf);
+    };
+
+    // Only run the rAF loop while the marquee is actually on screen — it's
+    // otherwise burning CPU/battery continuously for nothing once scrolled
+    // past, which matters a lot more on phones than on desktop.
+    const observer = new IntersectionObserver(
+      ([entry]) => (entry.isIntersecting ? start() : stop()),
+      { rootMargin: "200px 0px" },
+    );
+    if (sectionRef.current) observer.observe(sectionRef.current);
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
-      cancelAnimationFrame(raf);
+      stop();
+      observer.disconnect();
     };
   }, []);
 

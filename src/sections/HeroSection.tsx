@@ -10,7 +10,7 @@ export default function HeroSection() {
   return (
     <section className="relative h-screen flex flex-col" style={{ overflowX: "clip" }}>
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <GradientBlob className="absolute -top-[18%] -right-[12%] w-[700px] h-[700px] sm:w-[900px] sm:h-[900px] lg:w-[1100px] lg:h-[1100px] opacity-25 blur-[110px]" />
+        <GradientBlob className="absolute -top-[18%] -right-[12%] w-[420px] h-[420px] sm:w-[700px] sm:h-[700px] md:w-[900px] md:h-[900px] lg:w-[1100px] lg:h-[1100px] opacity-25 blur-2xl md:blur-[110px]" />
       </div>
 
       <FadeIn delay={0} y={-20} as="nav">

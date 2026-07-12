@@ -116,24 +116,28 @@ function ProjectCard({
           ) : null}
         </div>
 
-        <div className="flex gap-3 mt-6 sm:mt-8 flex-1 min-h-0">
+        <div className="flex gap-3 mt-6 sm:mt-8 flex-1 min-h-0 overflow-hidden">
           <div className="flex flex-col gap-3 w-2/5">
+            {/* aspect-ratio matches the real screenshot dimensions so the
+                frame fits the photo instead of cropping it to fill an
+                arbitrary box. */}
             <ProjectImg
               src={project.images?.col1[0]}
               className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] w-full"
-              style={{ height: "clamp(130px, 16vw, 230px)" }}
+              style={{ aspectRatio: "953 / 586" }}
               objectPosition="center 15%"
             />
             <ProjectImg
               src={project.images?.col1[1]}
-              className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] w-full flex-1"
-              style={{ height: "clamp(160px, 22vw, 340px)" }}
+              className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] w-full"
+              style={{ aspectRatio: "915 / 511" }}
               objectPosition="left top"
             />
           </div>
           <ProjectImg
             src={project.images?.col2}
-            className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] w-3/5 h-full"
+            className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] w-3/5 self-start"
+            style={{ aspectRatio: "1006 / 817" }}
             objectPosition="top"
           />
         </div>
@@ -175,7 +179,7 @@ export default function ProjectsSection() {
       className="relative bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 overflow-hidden"
     >
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <GradientBlob className="absolute -top-[12%] -left-[8%] w-[650px] h-[650px] md:w-[800px] md:h-[800px] opacity-10 blur-[120px]" />
+        <GradientBlob className="absolute -top-[12%] -left-[8%] w-[380px] h-[380px] sm:w-[650px] sm:h-[650px] md:w-[800px] md:h-[800px] opacity-10 blur-2xl md:blur-[120px]" />
       </div>
 
       <div className="flex justify-center mb-16 sm:mb-20 md:mb-28">
