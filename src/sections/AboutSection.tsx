@@ -12,8 +12,8 @@ export default function AboutSection() {
       id="about"
       className="relative min-h-screen flex flex-col items-center justify-center px-5 sm:px-8 md:px-10 py-20 overflow-hidden"
     >
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <GradientBlob className="w-[900px] h-[900px] sm:w-[1100px] sm:h-[1100px] md:w-[1300px] md:h-[1300px] opacity-20 blur-3xl" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <GradientBlob className="absolute -bottom-[15%] -left-[10%] w-[600px] h-[600px] sm:w-[750px] sm:h-[750px] md:w-[850px] md:h-[850px] opacity-15 blur-[110px]" />
       </div>
 
       <div className="relative flex flex-col items-center gap-10 sm:gap-14 md:gap-16">

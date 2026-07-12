@@ -174,8 +174,8 @@ export default function ProjectsSection() {
       id="projects"
       className="relative bg-[#0C0C0C] rounded-t-[40px] sm:rounded-t-[50px] md:rounded-t-[60px] -mt-10 sm:-mt-12 md:-mt-14 z-10 px-5 sm:px-8 md:px-10 py-20 sm:py-24 md:py-32 overflow-hidden"
     >
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-        <GradientBlob className="w-[1200px] h-[1200px] md:w-[1600px] md:h-[1600px] opacity-10 blur-[120px]" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <GradientBlob className="absolute -top-[12%] -left-[8%] w-[650px] h-[650px] md:w-[800px] md:h-[800px] opacity-10 blur-[120px]" />
       </div>
 
       <div className="flex justify-center mb-16 sm:mb-20 md:mb-28">

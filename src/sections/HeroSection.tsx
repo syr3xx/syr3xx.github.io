@@ -9,14 +9,8 @@ export default function HeroSection() {
 
   return (
     <section className="relative h-screen flex flex-col" style={{ overflowX: "clip" }}>
-      <div
-        className="absolute inset-0 overflow-hidden flex items-center justify-center pointer-events-none"
-        style={{
-          maskImage: "linear-gradient(to bottom, black 82%, transparent 100%)",
-          WebkitMaskImage: "linear-gradient(to bottom, black 82%, transparent 100%)",
-        }}
-      >
-        <GradientBlob className="w-[1500px] h-[1500px] sm:w-[1900px] sm:h-[1900px] md:w-[2300px] md:h-[2300px] lg:w-[2700px] lg:h-[2700px] opacity-45 blur-3xl" />
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <GradientBlob className="absolute -top-[18%] -right-[12%] w-[700px] h-[700px] sm:w-[900px] sm:h-[900px] lg:w-[1100px] lg:h-[1100px] opacity-25 blur-[110px]" />
       </div>
 
       <FadeIn delay={0} y={-20} as="nav">
@@ -47,7 +41,7 @@ export default function HeroSection() {
       <div className="relative flex-1">
         <div className="overflow-hidden mt-10 sm:mt-12 md:mt-14 px-6 md:px-10">
           <div className="inline-block">
-            <p className="text-[#D7E2EA] font-normal uppercase tracking-[0.3em] text-xs sm:text-sm md:text-base">
+            <p className="text-gradient-brand font-normal uppercase tracking-[0.3em] text-xs sm:text-sm md:text-base">
               {t.hero.subtitle}
             </p>
             <h1 className="glass-text font-normal uppercase tracking-tight leading-none whitespace-nowrap text-[11.3vw] sm:text-[9.3vw] md:text-[10.8vw] lg:text-[8.8vw]">

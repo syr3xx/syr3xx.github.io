@@ -45,6 +45,15 @@ body {
   -webkit-backdrop-filter: blur(6px);
 }
 
+/* Crisp brand-gradient text fill — used sparingly as a single deliberate
+   accent instead of a soft ambient background wash. */
+.text-gradient-brand {
+  background: linear-gradient(90deg, #b600a8, #7621b0, #be4c00);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
 ::selection {
   background: #b600a8;
   color: #fff;
