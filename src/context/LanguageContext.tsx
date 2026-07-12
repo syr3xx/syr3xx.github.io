@@ -37,6 +37,11 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     if (next === lang) return;
     setTransitionKey((k) => k + 1);
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setLangState(next);
+      return;
+    }
     timeoutRef.current = setTimeout(() => setLangState(next), LANG_TRANSITION_COVER_MS);
   };
 

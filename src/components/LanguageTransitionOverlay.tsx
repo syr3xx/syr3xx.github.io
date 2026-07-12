@@ -1,4 +1,4 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   LANG_TRANSITION_COVER_MS,
   LANG_TRANSITION_TOTAL_MS,
@@ -9,6 +9,11 @@ const coverFraction = LANG_TRANSITION_COVER_MS / LANG_TRANSITION_TOTAL_MS;
 
 export default function LanguageTransitionOverlay() {
   const { transitionKey } = useLanguage();
+  const reduceMotion = useReducedMotion();
+
+  // The language swap already happens instantly for reduced-motion users
+  // (see LanguageContext), so the wave has nothing left to hide/reveal.
+  if (reduceMotion) return null;
 
   return (
     <AnimatePresence initial={false}>

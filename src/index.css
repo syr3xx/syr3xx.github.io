@@ -96,6 +96,16 @@ body {
   animation: blob-pulse 10s ease-in-out infinite;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  .blob-pulse {
+    animation: none;
+  }
+
+  html {
+    scroll-behavior: auto;
+  }
+}
+
 ::selection {
   background: #b600a8;
   color: #fff;

@@ -48,6 +48,11 @@ export default function MarqueeSection() {
   const current = useRef(0);
 
   useEffect(() => {
+    // This is a parallax-style effect (rows drift at a different rate than
+    // the actual scroll) — respect prefers-reduced-motion and leave the
+    // rows static instead.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const handleScroll = () => {
       const section = sectionRef.current;
       if (!section) return;

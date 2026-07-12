@@ -1,5 +1,5 @@
 import { useRef, type CSSProperties } from "react";
-import { motion, useScroll, useSpring, useTransform } from "framer-motion";
+import { motion, useReducedMotion, useScroll, useSpring, useTransform } from "framer-motion";
 
 interface AnimatedTextProps {
   text: string;
@@ -18,6 +18,15 @@ export default function AnimatedText({ text, className, style }: AnimatedTextPro
     damping: 34,
     mass: 0.5,
   });
+  const reduceMotion = useReducedMotion();
+
+  if (reduceMotion) {
+    return (
+      <p ref={ref} className={className} style={style}>
+        {text}
+      </p>
+    );
+  }
 
   // Tokenize into words (hyphen-terminated chunks count as their own word, so
   // existing compound-word hyphens remain valid line-break points) and
