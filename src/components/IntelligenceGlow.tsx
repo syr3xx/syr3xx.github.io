@@ -67,9 +67,12 @@ export default function IntelligenceGlow() {
         }}
         exit={{ opacity: 0 }}
         transition={{
-          duration: 3,
-          times: [0, 0.4, 0.65, 1],
-          ease: [0.16, 1, 0.3, 1],
+          duration: 3.6,
+          // Opacity ramps up gently over the first ~55% (a slow, even
+          // bloom) instead of snapping to full early; clip-path spread and
+          // both eases are smoothed to a soft S-curve so nothing pops in.
+          times: [0, 0.55, 0.72, 1],
+          ease: "easeInOut",
         }}
       >
         {BLOBS.map((blob, i) => (
