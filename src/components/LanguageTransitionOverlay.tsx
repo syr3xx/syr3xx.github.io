@@ -19,9 +19,9 @@ export default function LanguageTransitionOverlay() {
           background:
             "radial-gradient(circle at 96% 4%, #B600A8 0%, #7621B0 45%, #BE4C00 100%)",
         }}
-        initial={{ opacity: 1, clipPath: "circle(0% at 96% 4%)" }}
+        initial={{ opacity: 0.45, clipPath: "circle(0% at 96% 4%)" }}
         animate={{
-          opacity: [1, 1, 0],
+          opacity: [0.45, 0.45, 0],
           clipPath: ["circle(0% at 96% 4%)", "circle(150% at 96% 4%)", "circle(150% at 96% 4%)"],
         }}
         exit={{ opacity: 0 }}

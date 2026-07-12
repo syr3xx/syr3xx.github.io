@@ -4,8 +4,8 @@ import { translations, type Lang } from "../i18n/translations";
 // The wave overlay covers the whole screen before the content underneath
 // swaps language, so the swap is always hidden behind the mask. Keep these
 // in sync with the animation timing in LanguageTransitionOverlay.
-export const LANG_TRANSITION_COVER_MS = 900;
-export const LANG_TRANSITION_TOTAL_MS = 1550;
+export const LANG_TRANSITION_COVER_MS = 650;
+export const LANG_TRANSITION_TOTAL_MS = 1150;
 
 interface LanguageContextValue {
   lang: Lang;
