@@ -16,9 +16,10 @@ export default function ServiceRow({ num, name, desc, isFirst }: ServiceRowProps
   });
   const progress = useSpring(scrollYProgress, { stiffness: 220, damping: 30, mass: 0.6 });
 
-  const numOpacity = useTransform(progress, [0, 1], [0.3, 1]);
   const descOpacity = useTransform(progress, [0, 1], [0.25, 0.6]);
-  const barWidth = useTransform(progress, [0, 1], ["0%", "100%"]);
+  const fillWidth = useTransform(progress, [0, 1], ["0%", "100%"]);
+
+  const numStyle = { fontSize: "clamp(2.2rem, 7vw, 100px)" } as const;
 
   return (
     <div
@@ -29,12 +30,33 @@ export default function ServiceRow({ num, name, desc, isFirst }: ServiceRowProps
         borderBottom: "1px solid rgba(12,12,12,0.15)",
       }}
     >
-      <motion.span
-        className="font-normal text-[#0C0C0C] shrink-0"
-        style={{ fontSize: "clamp(2.2rem, 7vw, 100px)", opacity: numOpacity }}
-      >
-        {num}
-      </motion.span>
+      {/* Reading progress lives in the numeral itself: an outlined "01"
+          sits as the base, and a gradient-filled copy sweeps in from the
+          left — clipped by the same scroll progress that used to drive a
+          separate progress bar — so the number fills in as you read. */}
+      <div className="relative shrink-0" style={numStyle}>
+        <span
+          aria-hidden
+          className="font-normal block whitespace-nowrap"
+          style={{ color: "transparent", WebkitTextStroke: "1.5px rgba(12,12,12,0.35)" }}
+        >
+          {num}
+        </span>
+        <motion.div className="absolute inset-0 overflow-hidden" style={{ width: fillWidth }}>
+          <span
+            className="font-normal block whitespace-nowrap"
+            style={{
+              background: "linear-gradient(90deg, #B600A8, #7621B0, #BE4C00)",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+            }}
+          >
+            {num}
+          </span>
+        </motion.div>
+      </div>
+
       <div className="flex flex-col gap-3 sm:gap-4 pt-2 sm:pt-4">
         <h3
           className="text-[#0C0C0C] font-normal uppercase"
@@ -49,14 +71,6 @@ export default function ServiceRow({ num, name, desc, isFirst }: ServiceRowProps
           {desc}
         </motion.p>
       </div>
-
-      {/* Reading-progress fill: grows in sync with the same scroll-linked
-          progress that drives the opacity above, sitting right on top of
-          the row's bottom border. */}
-      <motion.div
-        className="absolute left-0 bottom-[-1px] h-[2px] bg-[#0C0C0C]"
-        style={{ width: barWidth }}
-      />
     </div>
   );
 }
