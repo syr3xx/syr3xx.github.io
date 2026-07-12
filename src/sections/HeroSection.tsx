@@ -54,7 +54,7 @@ export default function HeroSection() {
         <div className="flex justify-between items-end gap-4 pb-7 sm:pb-8 md:pb-10 px-6 md:px-10">
           <TypewriterText
             text={t.hero.lead}
-            delay={0.35}
+            delayMs={350}
             className="text-[#D7E2EA] font-normal uppercase tracking-wide leading-snug max-w-[150px] sm:max-w-[200px] md:max-w-[240px]"
             style={{ fontSize: "clamp(0.7rem, 1.1vw, 1.15rem)" }}
           />

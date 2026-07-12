@@ -1,72 +1,80 @@
-import { motion, useReducedMotion, type Variants } from "framer-motion";
-import type { CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+import { useInView, useReducedMotion } from "framer-motion";
 
 interface TypewriterTextProps {
   text: string;
   className?: string;
   style?: CSSProperties;
-  delay?: number;
-  charDelay?: number;
+  delayMs?: number;
+  charDelayMs?: number;
 }
-
-const container = (delay: number, charDelay: number): Variants => ({
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: charDelay, delayChildren: delay },
-  },
-});
-
-const charVariant: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 0.4, ease: "easeIn" } },
-};
 
 export default function TypewriterText({
   text,
   className,
   style,
-  delay = 0,
-  charDelay = 0.035,
+  delayMs = 350,
+  charDelayMs = 35,
 }: TypewriterTextProps) {
   const reduceMotion = useReducedMotion();
+  const ref = useRef<HTMLParagraphElement>(null);
+  const inView = useInView(ref, { once: true, amount: 0.4 });
+  const [count, setCount] = useState(0);
+  const [showCursor, setShowCursor] = useState(false);
+  const startedRef = useRef(false);
 
-  if (reduceMotion) {
-    return (
-      <p className={className} style={style}>
-        {text}
-      </p>
-    );
-  }
+  useEffect(() => {
+    if (!inView || startedRef.current) return;
+    startedRef.current = true;
 
-  // Same word/hyphen-safe tokenizing as AnimatedText: grouping each word's
-  // characters in a `white-space: nowrap` box stops the browser from
-  // treating every inline-block character gap as a valid line-break point.
-  const tokens = text.match(/\S+?-|\S+|\s+/g) ?? [];
+    if (reduceMotion) {
+      setCount(text.length);
+      return;
+    }
+
+    let cancelled = false;
+    const timeouts: ReturnType<typeof setTimeout>[] = [];
+
+    const startTimer = setTimeout(() => {
+      if (cancelled) return;
+      setShowCursor(true);
+      let i = 0;
+      const tick = () => {
+        i += 1;
+        setCount(i);
+        if (i < text.length) {
+          timeouts.push(setTimeout(tick, charDelayMs));
+        } else {
+          timeouts.push(setTimeout(() => setShowCursor(false), 900));
+        }
+      };
+      tick();
+    }, delayMs);
+    timeouts.push(startTimer);
+
+    return () => {
+      cancelled = true;
+      timeouts.forEach(clearTimeout);
+    };
+  }, [inView, text, delayMs, charDelayMs, reduceMotion]);
 
   return (
-    <motion.p
-      className={className}
-      style={style}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.4 }}
-      variants={container(delay, charDelay)}
-    >
-      {tokens.map((token, ti) => {
-        const chars = token.split("").map((char, ci) => (
-          <motion.span key={ci} variants={charVariant} style={{ display: "inline-block" }}>
-            {char === " " ? " " : char}
-          </motion.span>
-        ));
-
-        if (/^\s+$/.test(token)) return chars;
-
-        return (
-          <span key={ti} style={{ display: "inline-block", whiteSpace: "nowrap" }}>
-            {chars}
-          </span>
-        );
-      })}
-    </motion.p>
+    <p ref={ref} className={className} style={style}>
+      {text.slice(0, count)}
+      {showCursor && (
+        <span
+          aria-hidden
+          className="typewriter-cursor"
+          style={{
+            display: "inline-block",
+            width: "0.09em",
+            marginLeft: "0.06em",
+            height: "0.85em",
+            verticalAlign: "-0.08em",
+            background: "currentColor",
+          }}
+        />
+      )}
+    </p>
   );
 }
