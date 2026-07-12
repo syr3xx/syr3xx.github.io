@@ -14,8 +14,8 @@ export default function HeroSection() {
       </div>
 
       <FadeIn delay={0} y={-20} as="nav">
-        <div className="relative flex items-center justify-between px-6 md:px-10 pt-6 md:pt-8">
-          <ul className="flex flex-wrap justify-start gap-x-3 gap-y-1 sm:gap-x-6 md:gap-10">
+        <div className="relative flex items-center justify-between px-4 sm:px-6 md:px-10 pt-6 md:pt-8">
+          <ul className="flex flex-wrap justify-start gap-x-2 gap-y-1 sm:gap-x-6 md:gap-10">
             {[
               { id: "about", label: t.nav.about },
               { id: "services", label: t.nav.services },
@@ -27,7 +27,7 @@ export default function HeroSection() {
                   href={item.id === "contact" ? "https://t.me/syr3xx" : `#${item.id}`}
                   target={item.id === "contact" ? "_blank" : undefined}
                   rel={item.id === "contact" ? "noopener noreferrer" : undefined}
-                  className="whitespace-nowrap text-[#D7E2EA] font-normal uppercase tracking-wider text-xs sm:text-sm md:text-base lg:text-lg transition-opacity duration-300 hover:opacity-70"
+                  className="whitespace-nowrap text-[#D7E2EA] font-normal uppercase tracking-wide sm:tracking-wider text-[10px] sm:text-sm md:text-base lg:text-lg transition-opacity duration-300 hover:opacity-70"
                 >
                   {item.label}
                 </a>
@@ -38,7 +38,7 @@ export default function HeroSection() {
         </div>
       </FadeIn>
 
-      <div className="relative flex-1">
+      <div className="relative flex-1 flex flex-col justify-center sm:justify-between">
         <div className="overflow-hidden mt-10 sm:mt-12 md:mt-14 px-6 md:px-10">
           <div className="inline-block">
             <p className="text-gradient-brand font-normal uppercase tracking-[0.3em] text-xs sm:text-sm md:text-base">
@@ -49,20 +49,20 @@ export default function HeroSection() {
             </h1>
           </div>
         </div>
-      </div>
 
-      <div className="relative flex justify-between items-end pb-7 sm:pb-8 md:pb-10 px-6 md:px-10">
-        <FadeIn delay={0.35} y={20}>
-          <p
-            className="text-[#D7E2EA] font-normal uppercase tracking-wide leading-snug max-w-[150px] sm:max-w-[200px] md:max-w-[240px]"
-            style={{ fontSize: "clamp(0.7rem, 1.1vw, 1.15rem)" }}
-          >
-            {t.hero.lead}
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.5} y={20}>
-          <ContactButton label={t.hero.contact} />
-        </FadeIn>
+        <div className="flex justify-between items-end gap-4 mt-10 sm:mt-0 pb-7 sm:pb-8 md:pb-10 px-6 md:px-10">
+          <FadeIn delay={0.35} y={20}>
+            <p
+              className="text-[#D7E2EA] font-normal uppercase tracking-wide leading-snug max-w-[150px] sm:max-w-[200px] md:max-w-[240px]"
+              style={{ fontSize: "clamp(0.7rem, 1.1vw, 1.15rem)" }}
+            >
+              {t.hero.lead}
+            </p>
+          </FadeIn>
+          <FadeIn delay={0.5} y={20}>
+            <ContactButton label={t.hero.contact} />
+          </FadeIn>
+        </div>
       </div>
     </section>
   );

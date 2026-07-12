@@ -1,7 +1,8 @@
 import { useRef, useState, type CSSProperties } from "react";
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
-import { ImageOff } from "lucide-react";
+import { Expand, ImageOff } from "lucide-react";
 import GradientBlob from "../components/GradientBlob";
+import Lightbox from "../components/Lightbox";
 import LiveProjectButton from "../components/LiveProjectButton";
 import { useLanguage } from "../context/LanguageContext";
 
@@ -21,11 +22,13 @@ function ProjectImg({
   className,
   style,
   objectPosition,
+  onOpen,
 }: {
   src?: string;
   className?: string;
   style?: CSSProperties;
   objectPosition?: string;
+  onOpen?: (src: string) => void;
 }) {
   const [failed, setFailed] = useState(false);
 
@@ -41,14 +44,25 @@ function ProjectImg({
   }
 
   return (
-    <img
-      src={src}
-      alt=""
-      loading="lazy"
-      onError={() => setFailed(true)}
-      style={{ ...style, objectPosition: objectPosition ?? "center" }}
-      className={`object-cover border border-[#D7E2EA]/10 ${className ?? ""}`}
-    />
+    <button
+      type="button"
+      onClick={() => onOpen?.(src)}
+      aria-label="Open screenshot"
+      style={style}
+      className={`group relative block cursor-pointer overflow-hidden border border-[#D7E2EA]/10 ${className ?? ""}`}
+    >
+      <img
+        src={src}
+        alt=""
+        loading="lazy"
+        onError={() => setFailed(true)}
+        style={{ objectPosition: objectPosition ?? "center" }}
+        className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105"
+      />
+      <span className="absolute inset-0 flex items-center justify-center bg-black/0 group-hover:bg-black/30 transition-colors duration-200">
+        <Expand className="w-5 h-5 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+      </span>
+    </button>
   );
 }
 
@@ -58,12 +72,14 @@ function ProjectCard({
   total,
   liveLabel,
   soonLabel,
+  onOpenImage,
 }: {
   project: Project;
   index: number;
   total: number;
   liveLabel: string;
   soonLabel: string;
+  onOpenImage: (src: string) => void;
 }) {
   const ref = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
@@ -126,12 +142,14 @@ function ProjectCard({
               className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] w-full"
               style={{ aspectRatio: "953 / 586" }}
               objectPosition="center 15%"
+              onOpen={onOpenImage}
             />
             <ProjectImg
               src={project.images?.col1[1]}
               className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] w-full"
               style={{ aspectRatio: "915 / 511" }}
               objectPosition="left top"
+              onOpen={onOpenImage}
             />
           </div>
           <ProjectImg
@@ -139,6 +157,7 @@ function ProjectCard({
             className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] w-3/5 self-start"
             style={{ aspectRatio: "1006 / 817" }}
             objectPosition="top"
+            onOpen={onOpenImage}
           />
         </div>
       </motion.div>
@@ -148,6 +167,7 @@ function ProjectCard({
 
 export default function ProjectsSection() {
   const { t } = useLanguage();
+  const [lightboxSrc, setLightboxSrc] = useState<string | null>(null);
 
   const projects: Project[] = [
     {
@@ -200,9 +220,12 @@ export default function ProjectsSection() {
             total={projects.length}
             liveLabel={t.projects.live}
             soonLabel={t.projects.soon}
+            onOpenImage={setLightboxSrc}
           />
         ))}
       </div>
+
+      <Lightbox src={lightboxSrc} onClose={() => setLightboxSrc(null)} />
     </section>
   );
 }
