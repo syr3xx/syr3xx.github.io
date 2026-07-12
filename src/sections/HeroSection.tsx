@@ -38,19 +38,19 @@ export default function HeroSection() {
         </div>
       </FadeIn>
 
-      <div className="relative flex-1 flex flex-col justify-center sm:justify-between">
+      <div className="relative flex-1 flex flex-col justify-between">
         <div className="overflow-hidden mt-10 sm:mt-12 md:mt-14 px-6 md:px-10">
           <div className="inline-block">
             <p className="text-gradient-brand font-normal uppercase tracking-[0.3em] text-xs sm:text-sm md:text-base">
               {t.hero.subtitle}
             </p>
-            <h1 className="glass-text font-normal uppercase tracking-tight leading-none whitespace-nowrap text-[11.3vw] sm:text-[9.3vw] md:text-[10.8vw] lg:text-[8.8vw]">
+            <h1 className="glass-text font-normal uppercase tracking-tight leading-none whitespace-nowrap text-[12.8vw] sm:text-[9.3vw] md:text-[10.8vw] lg:text-[8.8vw]">
               {t.hero.title}
             </h1>
           </div>
         </div>
 
-        <div className="flex justify-between items-end gap-4 mt-10 sm:mt-0 pb-7 sm:pb-8 md:pb-10 px-6 md:px-10">
+        <div className="flex justify-between items-end gap-4 pb-7 sm:pb-8 md:pb-10 px-6 md:px-10">
           <FadeIn delay={0.35} y={20}>
             <p
               className="text-[#D7E2EA] font-normal uppercase tracking-wide leading-snug max-w-[150px] sm:max-w-[200px] md:max-w-[240px]"
