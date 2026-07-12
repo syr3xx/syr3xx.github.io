@@ -39,8 +39,8 @@ export default function HeroSection() {
       </FadeIn>
 
       <div className="relative flex-1 flex flex-col justify-between">
-        <div className="overflow-hidden mt-10 sm:mt-12 md:mt-14 px-6 md:px-10">
-          <div className="inline-block">
+        <div className="overflow-hidden mt-10 sm:mt-12 md:mt-14 px-6 md:px-10 flex justify-center sm:block">
+          <div className="inline-block text-center sm:text-left">
             <p className="text-gradient-brand font-normal uppercase tracking-[0.3em] text-xs sm:text-sm md:text-base">
               {t.hero.subtitle}
             </p>
