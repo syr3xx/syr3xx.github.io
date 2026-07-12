@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body,
+#root {
+  background: #0c0c0c;
+  min-height: 100%;
+}
+
+body {
+  font-family: "Kanit", sans-serif;
+}
+
+html[data-lang="ru"] body {
+  font-family: "Rubik", sans-serif;
+}
+
+/* Rubik renders ~7-8% taller than Kanit at the same declared font-size
+   (measured via canvas text metrics), so scale the RU tree down to
+   visually match EN sizing across all the mixed vw/rem/px units in use. */
+html[data-lang="ru"] .site-content {
+  zoom: 0.93;
+}
+
+/* Liquid glass: light variant, for use on dark backgrounds */
+.glass {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.03)
+  );
+  backdrop-filter: blur(18px) saturate(180%);
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.3),
+    inset 0 -16px 24px -20px rgba(255, 255, 255, 0.08),
+    0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Liquid glass applied directly to text: light variant, for headings on dark backgrounds */
+.glass-text {
+  color: rgba(255, 255, 255, 0.94);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+/* Liquid glass applied directly to text: dark variant, for headings on light backgrounds */
+.glass-text-dark {
+  color: rgba(12, 12, 12, 0.94);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+::selection {
+  background: #b600a8;
+  color: #fff;
+}
