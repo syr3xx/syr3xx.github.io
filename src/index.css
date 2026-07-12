@@ -54,6 +54,21 @@ body {
   color: transparent;
 }
 
+/* Barely-there breathing motion for the background glows — kept subtle on
+   purpose, just enough to feel alive rather than a static image. */
+@keyframes blob-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.045);
+  }
+}
+.blob-pulse {
+  animation: blob-pulse 10s ease-in-out infinite;
+}
+
 ::selection {
   background: #b600a8;
   color: #fff;

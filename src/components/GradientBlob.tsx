@@ -1,6 +1,6 @@
 export default function GradientBlob({ className }: { className?: string }) {
   return (
-    <div className={className}>
+    <div className={`blob-pulse ${className ?? ""}`}>
       <svg viewBox="0 0 200 200" className="w-full h-full">
         <defs>
           <linearGradient id="blobGradient" x1="0%" y1="0%" x2="100%" y2="100%">
