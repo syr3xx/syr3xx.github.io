@@ -25,3 +25,6 @@ dist-ssr
 
 # Scratch / dev scripts
 .scratch
+
+# Claude Code internal state
+.claude
