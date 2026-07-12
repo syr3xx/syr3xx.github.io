@@ -6,11 +6,13 @@ import ServicesSection from "./sections/ServicesSection";
 import ProjectsSection from "./sections/ProjectsSection";
 import Footer from "./sections/Footer";
 import LanguageTransitionOverlay from "./components/LanguageTransitionOverlay";
+import IntelligenceGlow from "./components/IntelligenceGlow";
 
 function App() {
   return (
     <LanguageProvider>
       <LanguageTransitionOverlay />
+      <IntelligenceGlow />
       <div style={{ background: "#0C0C0C", overflowX: "clip" }}>
         <HeroSection />
         <MarqueeSection />
