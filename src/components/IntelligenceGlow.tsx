@@ -13,28 +13,40 @@ export default function IntelligenceGlow() {
   if (reduceMotion) return null;
 
   return (
-    <AnimatePresence initial={false}>
-      <motion.div
-        key={lang}
-        aria-hidden
-        className="intelligence-glow"
-        initial={{ opacity: 0, clipPath: "circle(0% at 96% 4%)" }}
-        animate={{
-          opacity: [0, 0.6, 0.6, 0],
-          clipPath: [
-            "circle(0% at 96% 4%)",
-            "circle(150% at 96% 4%)",
-            "circle(150% at 96% 4%)",
-            "circle(150% at 96% 4%)",
-          ],
-        }}
-        exit={{ opacity: 0 }}
-        transition={{
-          duration: 3,
-          times: [0, 0.4, 0.65, 1],
-          ease: [0.16, 1, 0.3, 1],
-        }}
-      />
-    </AnimatePresence>
+    <>
+      {/* Fractal-noise displacement so the ring's outer edge frays/branches
+          instead of reading as a clean geometric line. */}
+      <svg width="0" height="0" style={{ position: "absolute" }} aria-hidden>
+        <defs>
+          <filter id="glow-fray" x="-30%" y="-30%" width="160%" height="160%">
+            <feTurbulence type="fractalNoise" baseFrequency="0.006 0.05" numOctaves="3" seed="7" result="noise" />
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="90" xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </defs>
+      </svg>
+      <AnimatePresence initial={false}>
+        <motion.div
+          key={lang}
+          aria-hidden
+          className="intelligence-glow"
+          initial={{ opacity: 0, clipPath: "circle(0% at 96% 4%)" }}
+          animate={{
+            opacity: [0, 0.6, 0.6, 0],
+            clipPath: [
+              "circle(0% at 96% 4%)",
+              "circle(150% at 96% 4%)",
+              "circle(150% at 96% 4%)",
+              "circle(150% at 96% 4%)",
+            ],
+          }}
+          exit={{ opacity: 0 }}
+          transition={{
+            duration: 3,
+            times: [0, 0.4, 0.65, 1],
+            ease: [0.16, 1, 0.3, 1],
+          }}
+        />
+      </AnimatePresence>
+    </>
   );
 }
