@@ -11,7 +11,7 @@ function App() {
   return (
     <LanguageProvider>
       <LanguageTransitionOverlay />
-      <div className="site-content" style={{ background: "#0C0C0C", overflowX: "clip" }}>
+      <div style={{ background: "#0C0C0C", overflowX: "clip" }}>
         <HeroSection />
         <MarqueeSection />
         <AboutSection />

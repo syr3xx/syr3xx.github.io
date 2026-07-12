@@ -12,18 +12,7 @@ body,
 }
 
 body {
-  font-family: "Kanit", sans-serif;
-}
-
-html[data-lang="ru"] body {
-  font-family: "Rubik", sans-serif;
-}
-
-/* Rubik renders ~7-8% taller than Kanit at the same declared font-size
-   (measured via canvas text metrics), so scale the RU tree down to
-   visually match EN sizing across all the mixed vw/rem/px units in use. */
-html[data-lang="ru"] .site-content {
-  zoom: 0.93;
+  font-family: "Inter", sans-serif;
 }
 
 /* Liquid glass: light variant, for use on dark backgrounds */
