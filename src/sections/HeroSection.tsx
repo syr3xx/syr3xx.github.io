@@ -2,6 +2,7 @@ import FadeIn from "../components/FadeIn";
 import ContactButton from "../components/ContactButton";
 import GradientBlob from "../components/GradientBlob";
 import LanguageToggle from "../components/LanguageToggle";
+import TypewriterText from "../components/TypewriterText";
 import { useLanguage } from "../context/LanguageContext";
 
 export default function HeroSection() {
@@ -51,14 +52,12 @@ export default function HeroSection() {
         </div>
 
         <div className="flex justify-between items-end gap-4 pb-7 sm:pb-8 md:pb-10 px-6 md:px-10">
-          <FadeIn delay={0.35} y={20}>
-            <p
-              className="text-[#D7E2EA] font-normal uppercase tracking-wide leading-snug max-w-[150px] sm:max-w-[200px] md:max-w-[240px]"
-              style={{ fontSize: "clamp(0.7rem, 1.1vw, 1.15rem)" }}
-            >
-              {t.hero.lead}
-            </p>
-          </FadeIn>
+          <TypewriterText
+            text={t.hero.lead}
+            delay={0.35}
+            className="text-[#D7E2EA] font-normal uppercase tracking-wide leading-snug max-w-[150px] sm:max-w-[200px] md:max-w-[240px]"
+            style={{ fontSize: "clamp(0.7rem, 1.1vw, 1.15rem)" }}
+          />
           <FadeIn delay={0.5} y={20}>
             <ContactButton label={t.hero.contact} />
           </FadeIn>

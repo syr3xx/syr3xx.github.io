@@ -132,7 +132,7 @@ function ProjectCard({
           ) : null}
         </div>
 
-        <div className="flex gap-3 mt-6 sm:mt-8 flex-1 min-h-0 overflow-hidden">
+        <div className="flex items-center gap-3 mt-6 sm:mt-8 flex-1 min-h-0 overflow-hidden">
           <div className="flex flex-col gap-3 w-2/5">
             {/* aspect-ratio matches the real screenshot dimensions so the
                 frame fits the photo instead of cropping it to fill an
@@ -154,7 +154,7 @@ function ProjectCard({
           </div>
           <ProjectImg
             src={project.images?.col2}
-            className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] w-3/5 self-start"
+            className="rounded-[40px] sm:rounded-[50px] md:rounded-[60px] w-3/5"
             style={{ aspectRatio: "1006 / 817" }}
             objectPosition="top"
             onOpen={onOpenImage}
