@@ -122,32 +122,6 @@ body {
   animation: typewriter-blink 0.9s step-end infinite;
 }
 
-/* Apple Intelligence-style edge glow, shown briefly on a language switch.
-   Several large, heavily-blurred radial-gradient blobs bleed in from each
-   corner (positioned partly off-screen, clipped by overflow:hidden) rather
-   than a single geometric ring — an organic bloom with no shared boundary
-   that could ever show a seam or gap. */
-.intelligence-glow {
-  position: fixed;
-  inset: 0;
-  z-index: 150;
-  pointer-events: none;
-  overflow: hidden;
-}
-.intelligence-blob {
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(70px);
-}
-
-/* Skip entirely on mobile — blurred, moving overlays are exactly the kind
-   of thing that's expensive on a phone GPU for a decorative flourish. */
-@media (max-width: 767px) {
-  .intelligence-glow {
-    display: none;
-  }
-}
-
 ::selection {
   background: #b600a8;
   color: #fff;
